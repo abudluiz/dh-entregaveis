@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/filmes/{id}', 'FilmesController@procurarFilmeId');
+
+Route::get('/filmes/procurar/{nomeFilme}', 'FilmesController@procurarFilmeNome');
+
+Route::get(' /adicionarFilme/{filme}', 'FilmesController@adicionarFilme');
