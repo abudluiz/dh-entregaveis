@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Movie;
+use App\GeneroModel;
 
 class FormController extends Controller
 {
     public function form(){
-        return view('formFilmes');
+       $genero = GeneroModel::all();
+        return view('formFilmes')-> with('genero', $genero);
     }
 
     public function exibirFilmes(){
-        $filmes = Movie::all();
+        $filmes = Movie::paginate(10);
         return view('todosFilmes')->with('filmes', $filmes);
     }
+ 
 
     public function editForm($id){
         $filme = Movie::find($id);
@@ -32,6 +35,7 @@ class FormController extends Controller
         $filme = Movie::find($id);
         $filme->title = $request->input('title');
         $filme->rating = $request->input('rating');
+        $filme->genre_id = $request->input('genre_id');
         $filme->awards = $request->input('awards');
         $filme->length = $request->input('length');
         $filme->release_date = $DataParaBanco;
@@ -75,6 +79,7 @@ class FormController extends Controller
     public function validar (Request $request){
         $this->validate($request, [
             'title' => 'required',
+            'genre_id'=> 'required',
             'rating' => 'numeric|min:1-max:10',
             'awards' => 'numeric|min:0',
             'length' => 'numeric|min:50',
@@ -85,6 +90,7 @@ class FormController extends Controller
 
         $usuario = Movie::create([
             'title' => $request->input('title'),
+            'genre_id'=> $request->input('genre_id'),
             'rating' => $request->input('rating'),
             'awards' =>$request->input('awards'),
             'length' => $request->input('length'),

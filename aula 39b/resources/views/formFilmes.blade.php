@@ -15,7 +15,6 @@
         </div>
     @endif
 
-    
 
         <h1 align="center">Formulário</h1>
         <form method="post" action="/validar">
@@ -28,6 +27,16 @@
             <div class="form-group col-6 m-auto">
                 <label for="classificacao">Classificação</label>
                 <input type="text" class="form-control" name="rating" id="classificacao"/>
+            </div>
+            <br>
+            <div class="form-group col-6 m-auto">
+                <label for="genero">Genero</label>
+                    <select name="genre_id">
+                    @foreach ($genero as $genero)
+                        <option value="{{ $genero->id }}"> {{ $genero->name }} </option>
+                    @endforeach    
+                    </select>
+                <br>
             </div>
             <div class="form-group col-6 m-auto">
                 <label for="premios">Prêmios</label>

@@ -31,3 +31,8 @@ Route::put('/filme/edit/{id}', 'FormController@update');
 // Rotas de Atores
 Route::get('/ator', 'FormAtorController@atorForm');
 Route::post('/validarAtor', 'FormAtorController@validarAtor');
+
+
+// Rotas de Genero
+Route::get('/exibirGenero/{id}', 'generoController@exibirGenero');
+Route::post('/validarGenero', 'generoController@validarGenero');

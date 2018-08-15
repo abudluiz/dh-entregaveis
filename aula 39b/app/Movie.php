@@ -8,7 +8,8 @@ class Movie extends Model
 {
     protected $table = "movies";
 
-    protected $fillable = ['title', 'rating', 'awards','length', 'release_date'];
+    protected $fillable = ['title', 'rating', 'awards','length', 'release_date', 'genre_id'];
+
 
     public function getReleaseDate() {
         $release_date = new \Datetime($this->release_date);
@@ -17,5 +18,9 @@ class Movie extends Model
     public function getRealeaseDateToInput() {
         $release_date = new \Datetime($this->release_date);
         return $release_date->format('Y-m-d');
+    }
+
+    public function atoresListado() {
+        return $this->belongsToMany(Actors::class, 'actor_movie', 'movie_id', 'actor_id');
     }
 }
